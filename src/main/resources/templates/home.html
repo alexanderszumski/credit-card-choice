@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Credit Card Choice</title>
+</head>
+<header class="page-intro">
+    <h1>Compare your credit card points</h1>
+    <p>Enter your monthly spending to compare estimated rewards.</p>
+</header>
+<body>
+    <p th:if="${error != null}" th:text="${error}"></p>
+    <form action="/compare" method="post">
+        <div class = "field">
+            <label for="dining">Monthly dining spending ($)</label>
+            <input
+                id="dining"
+                name="dining"
+                type="number"
+                min="0"
+                step="0.01"
+                required
+            >
+        </div>
+        <div class = "field">
+            <label for="grocery">Monthly grocery spending ($)</label>
+            <input
+                id="grocery"
+                name="grocery"
+                type="number"
+                min="0"
+                step="0.01"
+                required
+            >
+        </div>
+        <div class = "field">
+            <label for="travel">Monthly travel spending ($)</label>
+            <input
+                id="travel"
+                name="travel"
+                type="number"
+                min="0"
+                step="0.01"
+                required
+            >
+        </div>
+        <div class = "field">
+            <label for="gas">Monthly gas spending ($)</label>
+            <input
+                id="gas"
+                name="gas"
+                type="number"
+                min="0"
+                step="0.01"
+                required
+            >
+        </div>
+        <div class = "field">
+            <label for="other">Monthly spending on all other categories ($)</label>
+            <input
+                id="other"
+                name="other"
+                type="number"
+                min="0"
+                step="0.01"
+                required
+            >
+        </div>
+        <fieldset>
+            <legend>Leave the card name blank to compare only stored cards.</legend>
+            <div class = "field">
+                <label for = "customName">Name of card</label>
+                <input
+                id="customName"
+                name="customName"
+                type="text"
+                >
+            </div>
+            <div class = "field">
+            <label for="customDining">Dining points per dollar</label>
+            <input
+                id="customDining"
+                name="customDining"
+                type="number"
+                min="0"
+                step="0.01"
+                value="1"
+                required
+            >
+        </div>
+        <div class = "field">
+            <label for="customGrocery">Grocery points per dollar</label>
+            <input
+                id="customGrocery"
+                name="customGrocery"
+                type="number"
+                min="0"
+                step="0.01"
+                value="1"
+                required
+            >
+        </div>
+        <div class = "field">
+            <label for="customTravel">Travel points per dollar</label>
+            <input
+                id="customTravel"
+                name="customTravel"
+                type="number"
+                min="0"
+                step="0.01"
+                value="1"
+                required
+            >
+        </div>
+        <div class = "field">
+            <label for="customGas">Gas points per dollar</label>
+            <input
+                id="customGas"
+                name="customGas"
+                type="number"
+                min="0"
+                step="0.01"
+                value="1"
+                required
+            >
+        </div>
+        <div class = "field">
+            <label for="customOther">Points per dollar on all other purchases</label>
+            <input
+                id="customOther"
+                name="customOther"
+                type="number"
+                min="0"
+                step="0.01"
+                value="1"
+                required
+            >
+        </div>
+        </fieldset>
+        <button type="submit">Compare cards</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/styles.css">
+        <meta charset="UTF-8">
+        <title>Comparison Results</title>
+    </head>
+    <body>
+        <h1>Comparison Results</h1>
+        <h3>Total Monthly Spending ($): </h3>
+        <p th:text="${totalSpending}">0</p>
+        <ul class="comparison-results">
+            <li th:each="comparison : ${comparisons}">
+                <span th:text="${comparison.name()}">Card</span>
+                — earns
+                <span th:text="${#numbers.formatDecimal(comparison.monthlyPoints(), 1, 0)}">0</span>
+                points per month.
+            </li>
+        </ul>
+        <a href="/">Back to spending form</a>
+    </body>
+</html>

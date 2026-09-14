@@ -1,0 +1,26 @@
+.field {
+        display: grid;
+        gap: 0.4rem;
+        margin-inline: auto;
+        }
+form, fieldset {
+        margin-inline: auto;
+        display: grid;
+        gap: 1rem;
+        max-width: 28rem;
+        }
+body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+        max-width: 60rem;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        line-height: 1.5;
+}
+.page-intro {
+    text-align: center;
+}
+.comparison-results {
+    list-style-position: inside;
+    padding-inline-start: 0;
+}

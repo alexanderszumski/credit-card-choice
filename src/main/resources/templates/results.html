@@ -1,23 +1,61 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/styles.css">
-        <meta charset="UTF-8">
-        <title>Comparison Results</title>
-    </head>
-    <body>
-        <h1>Comparison Results</h1>
-        <h3>Total Monthly Spending ($): </h3>
-        <p th:text="${totalSpending}">0</p>
-        <ul class="comparison-results">
-            <li th:each="comparison : ${comparisons}">
-                <span th:text="${comparison.name()}">Card</span>
-                — earns
-                <span th:text="${#numbers.formatDecimal(comparison.monthlyPoints(), 1, 0)}">0</span>
-                points per month.
-            </li>
-        </ul>
-        <a href="/">Back to spending form</a>
-    </body>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/styles.css">
+    <meta charset="UTF-8">
+    <title>Your Card Comparison | Credit Card Choice</title>
+</head>
+<body>
+    <div class="page-shell">
+        <nav class="site-nav" aria-label="Main navigation">
+            <a class="brand" href="/"><span class="brand-icon" aria-hidden="true">CC</span> Credit Card Choice</a>
+            <a class="back-link" href="/">New comparison <span aria-hidden="true">&rarr;</span></a>
+        </nav>
+        <main>
+            <header class="page-intro results-intro">
+                <p class="eyebrow">YOUR SPENDING, COMPARED</p>
+                <h1>Meet your card lineup.</h1>
+                <p>Estimated monthly points, ranked from highest to lowest.</p>
+                <div class="spending-total"><span>Monthly spending</span> <strong th:text="${'$' + #numbers.formatDecimal(totalSpending, 1, 'COMMA', 2, 'POINT')}">$0.00</strong></div>
+            </header>
+            <section aria-label="Card comparison results">
+                <ol class="comparison-results">
+                    <li class="result-card" th:each="comparison, position : ${comparisons}">
+                        <div class="result-topline">
+                            <span class="rank-label" th:text="${'#' + position.count}">#1</span>
+                            <span class="card-type" th:text="${comparison.custom() ? 'Custom card' : 'Catalog card'}">Catalog card</span>
+                        </div>
+                        <div class="card-visual">
+                            <img class="card-image" th:if="${comparison.imagePath() != null}" th:src="${comparison.imagePath()}" th:alt="${comparison.name() + ' card'}" width="320" height="202">
+                            <div class="card-placeholder" th:if="${comparison.imagePath() == null}" aria-hidden="true">
+                                <span class="placeholder-brand">Credit Card Choice</span>
+                                <span class="card-chip"></span>
+                                <span class="placeholder-name" th:text="${comparison.name()}">Your card</span>
+                            </div>
+                        </div>
+                        <h2 th:text="${comparison.name()}">Card</h2>
+                        <div class="point-total">
+                            <strong th:text="${#numbers.formatDecimal(comparison.monthlyPoints(), 1, 'COMMA', 0, 'POINT')}">0</strong>
+                            <span>estimated points / month</span>
+                        </div>
+                        <a class="learn-more" th:if="${comparison.learnMoreUrl() != null}" th:href="${comparison.learnMoreUrl()}" th:aria-label="|Learn more about ${comparison.name()} (opens in another tab)|" target="_blank" rel="noopener noreferrer">Learn more <span aria-hidden="true">&nearr;</span></a>
+                        <span class="custom-result-note" th:if="${comparison.learnMoreUrl() == null}" th:text="${comparison.custom() ? 'Calculated with your multipliers' : 'Compared with catalog multipliers'}">Calculated with your multipliers</span>
+                    </li>
+                </ol>
+                <div class="panel empty-results" th:if="${#lists.isEmpty(comparisons)}">
+                    <h2>No cards to compare yet</h2>
+                    <p>Add a custom card to your spending form to see its estimated points.</p>
+                    <a class="back-link" href="/">Back to the spending form &rarr;</a>
+                </div>
+            </section>
+            <aside class="results-note">
+                <h2>A quick note on these estimates</h2>
+                <p>Points are rounded down to whole numbers. Different rewards programs can have different point values. This comparison uses the catalog's category multipliers; fees, bonuses, spending caps and redemption values are not included. Check the issuer's page for current terms.</p>
+            </aside>
+            <div class="results-actions"><a class="primary-button" href="/">Try another comparison <span aria-hidden="true">&rarr;</span></a></div>
+        </main>
+        <footer class="site-footer">Card images belong to their respective issuers. Credit Card Choice is an independent project.</footer>
+    </div>
+</body>
 </html>

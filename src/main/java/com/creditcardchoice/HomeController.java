@@ -71,7 +71,7 @@ public class HomeController {
             }
             if(!customName.isBlank()){
                 CreditCard custom = new CreditCard(customName.trim(), customDining, customGrocery, customTravel, customGas, customOther);
-                CardComparison customHolder = new CardComparison(custom.getName().trim(), custom.calculateMonthlyPoints(dining, grocery, travel, gas, other));
+                CardComparison customHolder = new CardComparison(custom.getName().trim(), custom.calculateMonthlyPoints(dining, grocery, travel, gas, other), true);
                 comparisons.add(customHolder);
             }
             comparisons.sort(

@@ -1,145 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="/styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Credit Card Choice</title>
 </head>
-<header class="page-intro">
-    <h1>Compare your credit card points</h1>
-    <p>Enter your monthly spending to compare estimated rewards.</p>
-</header>
 <body>
-    <p th:if="${error != null}" th:text="${error}"></p>
-    <form action="/compare" method="post">
-        <div class = "field">
-            <label for="dining">Monthly dining spending ($)</label>
-            <input
-                id="dining"
-                name="dining"
-                type="number"
-                min="0"
-                step="0.01"
-                required
-            >
-        </div>
-        <div class = "field">
-            <label for="grocery">Monthly grocery spending ($)</label>
-            <input
-                id="grocery"
-                name="grocery"
-                type="number"
-                min="0"
-                step="0.01"
-                required
-            >
-        </div>
-        <div class = "field">
-            <label for="travel">Monthly travel spending ($)</label>
-            <input
-                id="travel"
-                name="travel"
-                type="number"
-                min="0"
-                step="0.01"
-                required
-            >
-        </div>
-        <div class = "field">
-            <label for="gas">Monthly gas spending ($)</label>
-            <input
-                id="gas"
-                name="gas"
-                type="number"
-                min="0"
-                step="0.01"
-                required
-            >
-        </div>
-        <div class = "field">
-            <label for="other">Monthly spending on all other categories ($)</label>
-            <input
-                id="other"
-                name="other"
-                type="number"
-                min="0"
-                step="0.01"
-                required
-            >
-        </div>
-        <fieldset>
-            <legend>Leave the card name blank to compare only stored cards.</legend>
-            <div class = "field">
-                <label for = "customName">Name of card</label>
-                <input
-                id="customName"
-                name="customName"
-                type="text"
-                >
-            </div>
-            <div class = "field">
-            <label for="customDining">Dining points per dollar</label>
-            <input
-                id="customDining"
-                name="customDining"
-                type="number"
-                min="0"
-                step="0.01"
-                value="1"
-                required
-            >
-        </div>
-        <div class = "field">
-            <label for="customGrocery">Grocery points per dollar</label>
-            <input
-                id="customGrocery"
-                name="customGrocery"
-                type="number"
-                min="0"
-                step="0.01"
-                value="1"
-                required
-            >
-        </div>
-        <div class = "field">
-            <label for="customTravel">Travel points per dollar</label>
-            <input
-                id="customTravel"
-                name="customTravel"
-                type="number"
-                min="0"
-                step="0.01"
-                value="1"
-                required
-            >
-        </div>
-        <div class = "field">
-            <label for="customGas">Gas points per dollar</label>
-            <input
-                id="customGas"
-                name="customGas"
-                type="number"
-                min="0"
-                step="0.01"
-                value="1"
-                required
-            >
-        </div>
-        <div class = "field">
-            <label for="customOther">Points per dollar on all other purchases</label>
-            <input
-                id="customOther"
-                name="customOther"
-                type="number"
-                min="0"
-                step="0.01"
-                value="1"
-                required
-            >
-        </div>
-        </fieldset>
-        <button type="submit">Compare cards</button>
-    </form>
+    <div class="page-shell">
+        <nav class="site-nav" aria-label="Main navigation">
+            <a class="brand" href="/"><span class="brand-icon" aria-hidden="true">CC</span> Credit Card Choice</a>
+            <span class="nav-note">Your spending. Your comparison.</span>
+        </nav>
+        <main>
+            <header class="page-intro">
+                <p class="eyebrow">MAKE YOUR EVERYDAY SPENDING COUNT</p>
+                <h1>Find the points in<br>your everyday spending.</h1>
+                <p>One monthly budget. A clearer picture of what each card could earn.</p>
+            </header>
+            <form class="spending-form" action="/compare" method="post">
+                <section class="panel spending-panel" aria-labelledby="spending-title">
+                    <div class="section-heading">
+                        <span class="step-number" aria-hidden="true">01</span>
+                        <div>
+                            <h2 id="spending-title">Your monthly spending</h2>
+                            <p>Enter an estimate for each category, in dollars.</p>
+                        </div>
+                    </div>
+                    <p class="error-message" role="alert" th:if="${error != null}" th:text="${error}"></p>
+                    <div class="spending-grid">
+                        <div class="field">
+                            <label for="dining">Dining</label>
+                            <div class="money-input"><span aria-hidden="true">$</span><input id="dining" name="dining" type="number" min="0" step="0.01" list="spending-suggestions" inputmode="decimal" placeholder="600" aria-describedby="dining-help" required></div>
+                            <small id="dining-help">Restaurants, takeout &amp; coffee</small>
+                        </div>
+                        <div class="field">
+                            <label for="grocery">Groceries</label>
+                            <div class="money-input"><span aria-hidden="true">$</span><input id="grocery" name="grocery" type="number" min="0" step="0.01" list="spending-suggestions" inputmode="decimal" placeholder="400" aria-describedby="grocery-help" required></div>
+                            <small id="grocery-help">Your regular grocery shopping</small>
+                        </div>
+                        <div class="field">
+                            <label for="travel">Travel</label>
+                            <div class="money-input"><span aria-hidden="true">$</span><input id="travel" name="travel" type="number" min="0" step="0.01" list="spending-suggestions" inputmode="decimal" placeholder="200" aria-describedby="travel-help" required></div>
+                            <small id="travel-help">Flights, hotels &amp; other travel</small>
+                        </div>
+                        <div class="field">
+                            <label for="gas">Gas</label>
+                            <div class="money-input"><span aria-hidden="true">$</span><input id="gas" name="gas" type="number" min="0" step="0.01" list="spending-suggestions" inputmode="decimal" placeholder="150" aria-describedby="gas-help" required></div>
+                            <small id="gas-help">Fuel for your everyday trips</small>
+                        </div>
+                        <div class="field full-width">
+                            <label for="other">Everything else</label>
+                            <div class="money-input"><span aria-hidden="true">$</span><input id="other" name="other" type="number" min="0" step="0.01" list="spending-suggestions" inputmode="decimal" placeholder="500" aria-describedby="other-help" required></div>
+                            <small id="other-help">Purchases outside the categories above</small>
+                        </div>
+                    </div>
+                </section>
+                <details class="panel custom-panel" th:open="${error != null}">
+                    <summary>
+                        <span class="step-number" aria-hidden="true">02</span>
+                        <span class="summary-title">Add your own card <small>Optional</small></span>
+                        <span class="expand-icon" aria-hidden="true">+</span>
+                    </summary>
+                    <div class="custom-content">
+                        <p class="section-description">Compare a custom card alongside the catalog. Leave the name blank to skip it.</p>
+                        <div class="field">
+                            <label for="customName">Card name</label>
+                            <input id="customName" name="customName" type="text" placeholder="My everyday card">
+                        </div>
+                        <p class="rate-description" id="rate-help">Points per dollar. Choose a suggestion or enter your own multiplier.</p>
+                        <div class="rate-grid">
+                            <div class="field"><label for="customDining">Dining</label><input id="customDining" name="customDining" type="number" min="0" step="0.01" list="rate-suggestions" value="1" aria-describedby="rate-help"></div>
+                            <div class="field"><label for="customGrocery">Groceries</label><input id="customGrocery" name="customGrocery" type="number" min="0" step="0.01" list="rate-suggestions" value="1" aria-describedby="rate-help"></div>
+                            <div class="field"><label for="customTravel">Travel</label><input id="customTravel" name="customTravel" type="number" min="0" step="0.01" list="rate-suggestions" value="1" aria-describedby="rate-help"></div>
+                            <div class="field"><label for="customGas">Gas</label><input id="customGas" name="customGas" type="number" min="0" step="0.01" list="rate-suggestions" value="1" aria-describedby="rate-help"></div>
+                            <div class="field"><label for="customOther">Other</label><input id="customOther" name="customOther" type="number" min="0" step="0.01" list="rate-suggestions" value="1" aria-describedby="rate-help"></div>
+                        </div>
+                        <p class="custom-note">Used only for this comparison. Your custom card is not saved.</p>
+                    </div>
+                </details>
+                <datalist id="spending-suggestions">
+                    <option value="0"></option><option value="100"></option><option value="250"></option><option value="500"></option><option value="1000"></option><option value="2000"></option>
+                </datalist>
+                <datalist id="rate-suggestions">
+                    <option value="0"></option><option value="1"></option><option value="1.5"></option><option value="2"></option><option value="3"></option><option value="4"></option><option value="5"></option><option value="10"></option>
+                </datalist>
+                <button class="primary-button" type="submit">Compare my cards <span aria-hidden="true">&rarr;</span></button>
+                <p class="form-note">Estimates in points, not dollars. No account needed.</p>
+            </form>
+        </main>
+        <footer class="site-footer">Credit Card Choice <span aria-hidden="true">&middot;</span> A simpler way to compare points.</footer>
+    </div>
 </body>
 </html>

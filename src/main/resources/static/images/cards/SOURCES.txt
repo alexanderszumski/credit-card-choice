@@ -1,0 +1,21 @@
+﻿Card images: official issuer assets, downloaded September 16, 2026.
+
+American Express Gold
+https://icm.aexp-static.com/Internet/Acquisition/US_en/AppContent/OneSite/category/cardarts/gold-card.png
+
+American Express Platinum
+https://icm.aexp-static.com/Internet/Acquisition/US_en/AppContent/OneSite/category/cardarts/platinum-card.png
+
+American Express Green
+https://icm.aexp-static.com/Internet/Acquisition/US_en/AppContent/OneSite/category/cardarts/green-card.png
+
+Chase Freedom Unlimited
+https://creditcards.chase.com/content/dam/jpmc-marketplace/card-art/freedom_unlimited_card_alt.png
+
+Chase Sapphire Preferred
+https://creditcards.chase.com/content/dam/jpmc-marketplace/card-art/sapphire-preferredcard2026.png
+
+Capital One Venture X
+https://ecm.capitalone.com/WCM/card/products/venturex-cg-static-card-1000x630-2.png
+
+Images and trademarks belong to their respective issuers. Inclusion does not imply endorsement.
